@@ -68,7 +68,7 @@ git push -u origin main
 
 ### 2. Deploy to your own VPS (Docker)
 
-The repo includes a `Dockerfile` (Next.js standalone build) and `docker-compose.yml`, matching a VPS that already runs other apps as Docker containers behind nginx — the container binds to `127.0.0.1` only, and nginx reverse-proxies it to a public port.
+The repo includes a `Dockerfile` (Next.js standalone build) and `docker-compose.yml`, matching a VPS that already runs other apps as Docker containers behind nginx — the container binds to `127.0.0.1:3300` (host-only, not the public port), and nginx reverse-proxies the public port to it. Using a different host port for the container than the public nginx port avoids a port collision between the two.
 
 ```bash
 # on the VPS
@@ -78,7 +78,7 @@ cd duc-chinh-fashion
 docker compose up -d --build
 ```
 
-Add an nginx server block for the port you want to expose it on (example `/etc/nginx/sites-available/duc-chinh-fashion`, listening on port 3000):
+Add an nginx server block for the public port you want to expose it on (example `/etc/nginx/sites-available/duc-chinh-fashion`, listening on port 3000 and proxying to the container's host-mapped port 3300):
 
 ```nginx
 server {
@@ -86,7 +86,7 @@ server {
     server_name _;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:3300;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
