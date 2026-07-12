@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { ProductArt } from "@/components/product-art";
 import { Reveal } from "@/components/reveal";
 
 export default async function AboutPage({
@@ -30,8 +30,14 @@ export default async function AboutPage({
 
       <section className="mx-auto max-w-7xl px-6 pb-24 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-          <Reveal className="aspect-[4/5] w-full overflow-hidden bg-muted lg:order-2">
-            <ProductArt swatch="#171310" accent="#cba86a" label="philosophy" seed={4} className="h-full w-full" />
+          <Reveal className="relative aspect-[4/5] w-full overflow-hidden bg-muted lg:order-2">
+            <Image
+              src="/images/about/craft.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </Reveal>
           <Reveal delay={0.1} className="lg:order-1">
             <h2 className="font-display text-2xl text-ink sm:text-3xl">{t("philosophyTitle")}</h2>
@@ -42,8 +48,14 @@ export default async function AboutPage({
         </div>
 
         <div className="mt-24 grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-          <Reveal className="aspect-[4/5] w-full overflow-hidden bg-muted">
-            <ProductArt swatch="#c9a86a" accent="#171310" label="craft" seed={6} className="h-full w-full" />
+          <Reveal className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+            <Image
+              src="/images/about/atelier.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display text-2xl text-ink sm:text-3xl">{t("craftTitle")}</h2>

@@ -1,8 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { ProductArt } from "@/components/product-art";
 import { formatPrice } from "@/lib/format";
 import type { Product } from "@/data/products";
 
@@ -17,13 +17,13 @@ export function ProductCard({ product, index = 0 }: { product: Product; index?: 
       style={{ animationDelay: `${Math.min(index, 6) * 60}ms` }}
     >
       <div className="relative overflow-hidden bg-muted">
-        <div className="aspect-[4/5] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-          <ProductArt
-            swatch={product.swatch}
-            accent={product.accent}
-            label={product.name[locale]}
-            seed={product.sku.length + product.slug.length}
-            className="h-full w-full"
+        <div className="relative aspect-[4/5] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+          <Image
+            src={product.images[0]}
+            alt={product.name[locale]}
+            fill
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover"
           />
         </div>
         {product.featured && (

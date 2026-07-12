@@ -41,7 +41,11 @@ src/
 
 ### Editing the catalog
 
-Products and categories are plain TypeScript data — no CMS or database. Edit [`src/data/products.ts`](src/data/products.ts) and [`src/data/categories.ts`](src/data/categories.ts), then rebuild. Product photography is currently a generated placeholder (`src/components/product-art.tsx`); swap in real photos via `next/image` when available.
+Products and categories are plain TypeScript data — no CMS or database. Edit [`src/data/products.ts`](src/data/products.ts) and [`src/data/categories.ts`](src/data/categories.ts), then rebuild.
+
+### Photography
+
+`public/images/` currently holds **stock photography from Unsplash** (free under the [Unsplash License](https://unsplash.com/license), no attribution required) — it stands in for real product shots so the site feels alive, but it is not actual Đức Chinh Fashion merchandise or models. Before a real launch, replace every file under `public/images/products`, `public/images/categories`, `public/images/hero.jpg`, and `public/images/about/` with your own product photography, then update the paths in `src/data/products.ts` / `src/data/categories.ts` if filenames change.
 
 ## Payments (not yet connected)
 

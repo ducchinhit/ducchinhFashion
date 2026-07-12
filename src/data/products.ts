@@ -9,6 +9,7 @@ export interface Product {
   slug: string;
   category: CategorySlug;
   sku: string;
+  images: [string, string];
   name: LocalizedText;
   shortDescription: LocalizedText;
   description: LocalizedText;
@@ -17,14 +18,13 @@ export interface Product {
   price: number;
   sizes: string[];
   featured: boolean;
-  swatch: string;
-  accent: string;
 }
 
 export const products: Product[] = [
   {
     slug: "ash-merino-overcoat",
     category: "outerwear",
+    images: ["/images/products/ash-merino-overcoat-1.jpg", "/images/products/ash-merino-overcoat-2.jpg"],
     sku: "DC-OC-101",
     name: { vi: "Áo Măng-tô Merino Xám Đá", en: "Ash Merino Overcoat" },
     shortDescription: {
@@ -46,12 +46,11 @@ export const products: Product[] = [
     price: 24500000,
     sizes: ["S", "M", "L", "XL"],
     featured: true,
-    swatch: "#3b3630",
-    accent: "#a9824c",
   },
   {
     slug: "single-breasted-wool-blazer",
     category: "outerwear",
+    images: ["/images/products/single-breasted-wool-blazer-1.jpg", "/images/products/single-breasted-wool-blazer-2.jpg"],
     sku: "DC-OC-102",
     name: { vi: "Blazer Len Đơn Hàng Khuy", en: "Single-Breasted Wool Blazer" },
     shortDescription: {
@@ -73,12 +72,11 @@ export const products: Product[] = [
     price: 16800000,
     sizes: ["XS", "S", "M", "L"],
     featured: true,
-    swatch: "#2a2620",
-    accent: "#cba86a",
   },
   {
     slug: "ivory-wool-trench",
     category: "outerwear",
+    images: ["/images/products/ivory-wool-trench-1.jpg", "/images/products/ivory-wool-trench-2.jpg"],
     sku: "DC-OC-103",
     name: { vi: "Áo Khoác Dạ Trench Ngà", en: "Ivory Wool Trench" },
     shortDescription: {
@@ -100,12 +98,11 @@ export const products: Product[] = [
     price: 19900000,
     sizes: ["S", "M", "L", "XL"],
     featured: false,
-    swatch: "#e7ded0",
-    accent: "#2a2620",
   },
   {
     slug: "belted-shearling-jacket",
     category: "outerwear",
+    images: ["/images/products/belted-shearling-jacket-1.jpg", "/images/products/belted-shearling-jacket-2.jpg"],
     sku: "DC-OC-104",
     name: { vi: "Áo Khoác Da Cừu Rút Dây", en: "Belted Shearling Jacket" },
     shortDescription: {
@@ -127,12 +124,11 @@ export const products: Product[] = [
     price: 38500000,
     sizes: ["S", "M", "L"],
     featured: true,
-    swatch: "#5c4632",
-    accent: "#e7ded0",
   },
   {
     slug: "silk-satin-slip-dress",
     category: "evening",
+    images: ["/images/products/silk-satin-slip-dress-1.jpg", "/images/products/silk-satin-slip-dress-2.jpg"],
     sku: "DC-EV-201",
     name: { vi: "Đầm Lụa Satin Dáng Suông", en: "Silk Satin Slip Dress" },
     shortDescription: {
@@ -154,12 +150,11 @@ export const products: Product[] = [
     price: 12200000,
     sizes: ["XS", "S", "M", "L"],
     featured: true,
-    swatch: "#c9a86a",
-    accent: "#171310",
   },
   {
     slug: "pleated-velvet-gown",
     category: "evening",
+    images: ["/images/products/pleated-velvet-gown-1.jpg", "/images/products/pleated-velvet-gown-2.jpg"],
     sku: "DC-EV-202",
     name: { vi: "Đầm Dạ Hội Xếp Ly Nhung", en: "Pleated Velvet Gown" },
     shortDescription: {
@@ -181,12 +176,11 @@ export const products: Product[] = [
     price: 28900000,
     sizes: ["XS", "S", "M", "L"],
     featured: true,
-    swatch: "#3a2436",
-    accent: "#cba86a",
   },
   {
     slug: "halter-crepe-midi-dress",
     category: "evening",
+    images: ["/images/products/halter-crepe-midi-dress-1.jpg", "/images/products/halter-crepe-midi-dress-2.jpg"],
     sku: "DC-EV-203",
     name: { vi: "Đầm Midi Crepe Cổ Yếm", en: "Halter Crepe Midi Dress" },
     shortDescription: {
@@ -208,12 +202,11 @@ export const products: Product[] = [
     price: 14500000,
     sizes: ["XS", "S", "M", "L", "XL"],
     featured: false,
-    swatch: "#6b5a44",
-    accent: "#f7f3ec",
   },
   {
     slug: "hand-embroidered-silk-corset",
     category: "evening",
+    images: ["/images/products/hand-embroidered-silk-corset-1.jpg", "/images/products/hand-embroidered-silk-corset-2.jpg"],
     sku: "DC-EV-204",
     name: { vi: "Áo Corset Lụa Thêu Tay", en: "Hand-Embroidered Silk Corset" },
     shortDescription: {
@@ -235,12 +228,11 @@ export const products: Product[] = [
     price: 9800000,
     sizes: ["XS", "S", "M"],
     featured: false,
-    swatch: "#171310",
-    accent: "#a9824c",
   },
   {
     slug: "two-piece-flannel-suit",
     category: "tailoring",
+    images: ["/images/products/two-piece-flannel-suit-1.jpg", "/images/products/two-piece-flannel-suit-2.jpg"],
     sku: "DC-TL-301",
     name: { vi: "Suit Hai Mảnh Len Flannel", en: "Two-Piece Flannel Suit" },
     shortDescription: {
@@ -262,12 +254,11 @@ export const products: Product[] = [
     price: 32000000,
     sizes: ["46", "48", "50", "52"],
     featured: true,
-    swatch: "#2a2620",
-    accent: "#e3dbc9",
   },
   {
     slug: "egyptian-cotton-shirt",
     category: "tailoring",
+    images: ["/images/products/egyptian-cotton-shirt-1.jpg", "/images/products/egyptian-cotton-shirt-2.jpg"],
     sku: "DC-TL-302",
     name: { vi: "Sơ Mi Cotton Ai Cập Trắng", en: "Egyptian Cotton Shirt" },
     shortDescription: {
@@ -289,12 +280,11 @@ export const products: Product[] = [
     price: 6900000,
     sizes: ["S", "M", "L", "XL"],
     featured: false,
-    swatch: "#f7f3ec",
-    accent: "#2a2620",
   },
   {
     slug: "wide-leg-tailored-trousers",
     category: "tailoring",
+    images: ["/images/products/wide-leg-tailored-trousers-1.jpg", "/images/products/wide-leg-tailored-trousers-2.jpg"],
     sku: "DC-TL-303",
     name: { vi: "Quần Âu Ống Suông Cao Cấp", en: "Wide-Leg Tailored Trousers" },
     shortDescription: {
@@ -316,12 +306,11 @@ export const products: Product[] = [
     price: 8400000,
     sizes: ["44", "46", "48", "50"],
     featured: false,
-    swatch: "#4a4438",
-    accent: "#f7f3ec",
   },
   {
     slug: "cashmere-wool-waistcoat",
     category: "tailoring",
+    images: ["/images/products/cashmere-wool-waistcoat-1.jpg", "/images/products/cashmere-wool-waistcoat-2.jpg"],
     sku: "DC-TL-304",
     name: { vi: "Áo Ghi-lê Len Cashmere", en: "Cashmere Wool Waistcoat" },
     shortDescription: {
@@ -343,8 +332,6 @@ export const products: Product[] = [
     price: 11600000,
     sizes: ["S", "M", "L", "XL"],
     featured: false,
-    swatch: "#5c4632",
-    accent: "#cba86a",
   },
 ];
 

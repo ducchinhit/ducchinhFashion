@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Check, Minus, Plus } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { ProductArt } from "@/components/product-art";
 import { ProductCard } from "@/components/product-card";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/context/cart-context";
@@ -28,8 +28,6 @@ export function ProductDetail({
   const [activeImage, setActiveImage] = useState(0);
   const [sizeError, setSizeError] = useState(false);
   const [added, setAdded] = useState(false);
-
-  const images = [0, 1];
 
   function handleAddToCart() {
     if (!size) {
@@ -55,31 +53,32 @@ export function ProductDetail({
 
       <div className="mt-8 grid grid-cols-1 gap-14 lg:grid-cols-2">
         <div>
-          <div className="aspect-[4/5] w-full overflow-hidden bg-muted">
-            <ProductArt
-              swatch={product.swatch}
-              accent={product.accent}
-              label={product.name[locale]}
-              seed={activeImage === 0 ? product.sku.length : product.sku.length + 11}
-              className="h-full w-full"
+          <div className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+            <Image
+              src={product.images[activeImage]}
+              alt={product.name[locale]}
+              fill
+              priority
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
             />
           </div>
           <div className="mt-4 grid grid-cols-2 gap-4">
-            {images.map((img) => (
+            {product.images.map((src, img) => (
               <button
-                key={img}
+                key={src}
                 type="button"
                 onClick={() => setActiveImage(img)}
-                className={`aspect-[4/5] overflow-hidden bg-muted transition-opacity ${
+                className={`relative aspect-[4/5] overflow-hidden bg-muted transition-opacity ${
                   activeImage === img ? "opacity-100 ring-1 ring-gold" : "opacity-60 hover:opacity-90"
                 }`}
               >
-                <ProductArt
-                  swatch={product.swatch}
-                  accent={product.accent}
-                  label={`${product.name[locale]} ${img + 1}`}
-                  seed={img === 0 ? product.sku.length : product.sku.length + 11}
-                  className="h-full w-full"
+                <Image
+                  src={src}
+                  alt={`${product.name[locale]} ${img + 1}`}
+                  fill
+                  sizes="25vw"
+                  className="object-cover"
                 />
               </button>
             ))}

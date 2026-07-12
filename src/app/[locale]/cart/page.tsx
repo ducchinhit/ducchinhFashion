@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Minus, Plus, X } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { ProductArt } from "@/components/product-art";
 import { formatPrice } from "@/lib/format";
 import { useCart } from "@/context/cart-context";
 
@@ -39,14 +39,14 @@ export default function CartPage() {
                 <li key={`${line.slug}-${line.size}`} className="flex gap-5 py-6">
                   <Link
                     href={`/product/${line.slug}`}
-                    className="h-28 w-24 shrink-0 overflow-hidden bg-muted"
+                    className="relative h-28 w-24 shrink-0 overflow-hidden bg-muted"
                   >
-                    <ProductArt
-                      swatch={line.product.swatch}
-                      accent={line.product.accent}
-                      label={line.product.name[locale]}
-                      seed={line.product.sku.length}
-                      className="h-full w-full"
+                    <Image
+                      src={line.product.images[0]}
+                      alt={line.product.name[locale]}
+                      fill
+                      sizes="96px"
+                      className="object-cover"
                     />
                   </Link>
                   <div className="flex flex-1 flex-col justify-between">

@@ -5,6 +5,7 @@ export interface Category {
   name: { vi: string; en: string };
   description: { vi: string; en: string };
   tone: "ink" | "gold" | "charcoal";
+  image: string;
 }
 
 export const categories: Category[] = [
@@ -16,6 +17,7 @@ export const categories: Category[] = [
       en: "Coats, blazers, and jackets structured to hold their shape through time.",
     },
     tone: "ink",
+    image: "/images/categories/outerwear.jpg",
   },
   {
     slug: "evening",
@@ -25,6 +27,7 @@ export const categories: Category[] = [
       en: "Dresses and evening pieces for the nights worth remembering.",
     },
     tone: "gold",
+    image: "/images/categories/evening.jpg",
   },
   {
     slug: "tailoring",
@@ -34,6 +37,7 @@ export const categories: Category[] = [
       en: "Suits, shirting, and considered separates cut with precision.",
     },
     tone: "charcoal",
+    image: "/images/categories/tailoring.jpg",
   },
 ];
 

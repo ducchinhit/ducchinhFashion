@@ -1,8 +1,7 @@
+import Image from "next/image";
 import { getTranslations, getLocale, setRequestLocale } from "next-intl/server";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { HeroArt } from "@/components/hero-art";
-import { ProductArt } from "@/components/product-art";
 import { ProductCard } from "@/components/product-card";
 import { Reveal } from "@/components/reveal";
 import { NewsletterForm } from "@/components/newsletter-form";
@@ -23,9 +22,15 @@ export default async function HomePage({
   return (
     <div>
       <section className="relative flex min-h-[92vh] items-end overflow-hidden">
-        <div className="absolute inset-0">
-          <HeroArt className="h-full w-full" />
-        </div>
+        <Image
+          src="/images/hero.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/50 to-ink/20" />
         <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-20 pt-40 lg:px-10 lg:pb-28">
           <p className="animate-fade-up text-xs tracking-[0.3em] text-gold-soft" style={{ animationDelay: "80ms" }}>
             {t("home.heroEyebrow")}
@@ -109,13 +114,13 @@ export default async function HomePage({
             {categories.map((category, i) => (
               <Reveal key={category.slug} delay={i * 0.1}>
                 <Link href={`/collections/${category.slug}`} className="group relative block overflow-hidden">
-                  <div className="aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
-                    <ProductArt
-                      swatch={category.tone === "gold" ? "#c9a86a" : category.tone === "charcoal" ? "#2a2620" : "#171310"}
-                      accent="#f7f3ec"
-                      label={category.name[currentLocale]}
-                      seed={i + 3}
-                      className="h-full w-full"
+                  <div className="relative aspect-[3/4] w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]">
+                    <Image
+                      src={category.image}
+                      alt={category.name[currentLocale]}
+                      fill
+                      sizes="(min-width: 768px) 33vw, 100vw"
+                      className="object-cover"
                     />
                   </div>
                   <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-ink/70 via-ink/0 to-ink/0 p-8">
@@ -137,8 +142,14 @@ export default async function HomePage({
 
       <section className="mx-auto max-w-7xl px-6 py-24 lg:px-10">
         <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-2">
-          <Reveal className="aspect-[4/5] w-full overflow-hidden bg-muted">
-            <ProductArt swatch="#e3dbc9" accent="#171310" label="atelier" seed={9} className="h-full w-full" />
+          <Reveal className="relative aspect-[4/5] w-full overflow-hidden bg-muted">
+            <Image
+              src="/images/about/philosophy.jpg"
+              alt=""
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </Reveal>
           <Reveal delay={0.15}>
             <p className="text-xs tracking-[0.3em] text-gold">{t("home.storyEyebrow")}</p>
