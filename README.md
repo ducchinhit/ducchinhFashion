@@ -66,30 +66,24 @@ git branch -M main
 git push -u origin main
 ```
 
-### 2. Deploy to your own VPS
+### 2. Deploy to your own VPS (Docker)
 
-The app is a standard Next.js server (not static export), so it needs Node.js running on the VPS.
+The repo includes a `Dockerfile` (Next.js standalone build) and `docker-compose.yml`, matching a VPS that already runs other apps as Docker containers behind nginx — the container binds to `127.0.0.1` only, and nginx reverse-proxies it to a public port.
 
 ```bash
 # on the VPS
-git clone <your-repo-url>
+mkdir -p /opt/apps && cd /opt/apps
+git clone https://github.com/ducchinhit/ducchinhFashion.git duc-chinh-fashion
 cd duc-chinh-fashion
-npm install
-npm run build
-
-# run with PM2 (recommended, keeps the app alive across reboots/crashes)
-npm install -g pm2
-pm2 start npm --name "duc-chinh-fashion" -- start
-pm2 save
-pm2 startup   # follow the printed instructions to enable on boot
+docker compose up -d --build
 ```
 
-Put nginx in front as a reverse proxy (example `/etc/nginx/sites-available/ducchinhfashion`):
+Add an nginx server block for the port you want to expose it on (example `/etc/nginx/sites-available/duc-chinh-fashion`, listening on port 3000):
 
 ```nginx
 server {
-    listen 80;
-    server_name ducchinhfashion.vn www.ducchinhfashion.vn;
+    listen 3000;
+    server_name _;
 
     location / {
         proxy_pass http://127.0.0.1:3000;
@@ -97,14 +91,39 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
         proxy_cache_bypass $http_upgrade;
     }
 }
 ```
 
-Then enable HTTPS with Certbot: `sudo certbot --nginx -d ducchinhfashion.vn -d www.ducchinhfashion.vn`.
+```bash
+ln -s /etc/nginx/sites-available/duc-chinh-fashion /etc/nginx/sites-enabled/
+nginx -t && systemctl reload nginx
+```
 
-To ship an update later: `git pull && npm install && npm run build && pm2 restart duc-chinh-fashion`.
+Once you have a domain pointed at the VPS, swap `server_name _;` for the real domain, change `listen 3000;` to `listen 80;` (or add a TLS block), and enable HTTPS with Certbot.
+
+To ship an update later:
+
+```bash
+cd /opt/apps/duc-chinh-fashion && git pull && docker compose up -d --build
+```
+
+#### Alternative: PM2 without Docker
+
+If the VPS doesn't run Docker, install Node.js 20.9+ directly and run the app with PM2 instead:
+
+```bash
+npm install && npm run build
+npm install -g pm2
+pm2 start npm --name "duc-chinh-fashion" -- start
+pm2 save && pm2 startup
+```
+
+Then point nginx at `http://127.0.0.1:3000` the same way as above.
 
 ### Node.js version
 
